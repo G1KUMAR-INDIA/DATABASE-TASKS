@@ -125,11 +125,18 @@ Answers:
 SELECT CITY FROM north_american_cities WHERE COUNTRY = "United States" ORDER BY POPULATION DESC LIMIT 2 OFFSET 2
 
 SQL Lesson 6: Multi-table queries with JOINs
+
 Exercise 6 — Tasks
+
 1.Find the domestic and international sales for each movie
+
 2.Show the sales numbers for each movie that did better internationally rather than domestically
+
 3.List all the movies by their ratings in descending order
+
 Answers:
+
+
 
 
 
