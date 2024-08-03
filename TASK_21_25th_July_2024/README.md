@@ -40,6 +40,7 @@ Answers:
 --SELECT TITLE,DIRECTOR FROM MOVIES WHERE DIRECTOR NOT LIKE "%John Lasseter%"
 SELECT TITLE FROM MOVIES WHERE TITLE LIKE "%WALL-%"
 
+
 SQL Lesson 4: Filtering and sorting Query results
 Exercise 4 — Tasks
 1.List all directors of Pixar movies (alphabetically), without duplicates
@@ -62,9 +63,9 @@ Review 1 — Tasks
 Answers:
 --SELECT CITY, POPULATION FROM north_american_cities WHERE country = "Canada"
 --SELECT CITY FROM north_american_cities WHERE COUNTRY = "United States" ORDER BY latitude DESC
---SELECT CITY FROM north_american_cities WHERE longitude < -87.629798 ORDER BY longitude;
---SELECT CITY FROM north_american_cities WHERE COUNTRY = "Mexico" ORDER BY POPULATION DESC LIMIT 2;
-SELECT CITY FROM north_american_cities WHERE COUNTRY = "United States" ORDER BY POPULATION DESC LIMIT 2 OFFSET 2;
+--SELECT CITY FROM north_american_cities WHERE longitude < -87.629798 ORDER BY longitude
+--SELECT CITY FROM north_american_cities WHERE COUNTRY = "Mexico" ORDER BY POPULATION DESC LIMIT 2
+SELECT CITY FROM north_american_cities WHERE COUNTRY = "United States" ORDER BY POPULATION DESC LIMIT 2 OFFSET 2
 
 SQL Lesson 6: Multi-table queries with JOINs
 Exercise 6 — Tasks
