@@ -1,0 +1,106 @@
+CREATE TABLE Students (
+    student_id INT PRIMARY KEY AUTO_INCREMENT,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    phone_number VARCHAR(15),
+    enrollment_date DATE NOT NULL
+);
+CREATE TABLE Instructors (
+    instructor_id INT PRIMARY KEY AUTO_INCREMENT,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    phone_number VARCHAR(15),
+    hire_date DATE NOT NULL
+);
+CREATE TABLE Courses (
+    course_id INT PRIMARY KEY AUTO_INCREMENT,
+    course_name VARCHAR(100) NOT NULL,
+    description TEXT,
+    duration_weeks INT NOT NULL,
+    fee DECIMAL(10, 2) NOT NULL
+);
+CREATE TABLE Classes (
+    class_id INT PRIMARY KEY AUTO_INCREMENT,
+    course_id INT NOT NULL,
+    instructor_id INT NOT NULL,
+    class_date DATE NOT NULL,
+    start_time TIME NOT NULL,
+    end_time TIME NOT NULL,
+    FOREIGN KEY (course_id) REFERENCES Courses(course_id),
+    FOREIGN KEY (instructor_id) REFERENCES Instructors(instructor_id)
+);
+CREATE TABLE Enrollments (
+    enrollment_id INT PRIMARY KEY AUTO_INCREMENT,
+    student_id INT NOT NULL,
+    course_id INT NOT NULL,
+    enrollment_date DATE NOT NULL,
+    FOREIGN KEY (student_id) REFERENCES Students(student_id),
+    FOREIGN KEY (course_id) REFERENCES Courses(course_id)
+);
+CREATE TABLE Assignments (
+    assignment_id INT PRIMARY KEY AUTO_INCREMENT,
+    class_id INT NOT NULL,
+    title VARCHAR(100) NOT NULL,
+    description TEXT,
+    due_date DATE NOT NULL,
+    FOREIGN KEY (class_id) REFERENCES Classes(class_id)
+);
+CREATE TABLE Assignment_Submissions (
+    submission_id INT PRIMARY KEY AUTO_INCREMENT,
+    assignment_id INT NOT NULL,
+    student_id INT NOT NULL,
+    submission_date DATE NOT NULL,
+    grade VARCHAR(2),
+    FOREIGN KEY (assignment_id) REFERENCES Assignments(assignment_id),
+    FOREIGN KEY (student_id) REFERENCES Students(student_id)
+);
+CREATE TABLE Projects (
+    project_id INT PRIMARY KEY AUTO_INCREMENT,
+    course_id INT NOT NULL,
+    title VARCHAR(100) NOT NULL,
+    description TEXT,
+    due_date DATE NOT NULL,
+    FOREIGN KEY (course_id) REFERENCES Courses(course_id)
+);
+CREATE TABLE Project_Submissions (
+    submission_id INT PRIMARY KEY AUTO_INCREMENT,
+    project_id INT NOT NULL,
+    student_id INT NOT NULL,
+    submission_date DATE NOT NULL,
+    grade VARCHAR(2),
+    FOREIGN KEY (project_id) REFERENCES Projects(project_id),
+    FOREIGN KEY (student_id) REFERENCES Students(student_id)
+);
+INSERT INTO Students (first_name, last_name, email, phone_number, enrollment_date)
+VALUES 
+('John', 'Doe', '[email protected]', '1234567890', '2023-01-01'),
+('Jane', 'Smith', '[email protected]', '0987654321', '2023-01-15');
+INSERT INTO Instructors (first_name, last_name, email, phone_number, hire_date)
+VALUES 
+('Alice', 'Johnson', '[email protected]', '1112223333', '2022-06-01'),
+('Bob', 'Williams', '[email protected]', '4445556666', '2022-07-15');
+INSERT INTO Courses (course_name, description, duration_weeks, fee)
+VALUES 
+('MERN Stack Development', 'Master MongoDB, Express.js, React, and Node.js to become a full-stack developer', 12, 1500.00);
+INSERT INTO Classes (course_id, instructor_id, class_date, start_time, end_time)
+VALUES 
+(1, 1, '2023-01-10', '10:00:00', '12:00:00'),
+(1, 2, '2023-01-12', '14:00:00', '16:00:00');
+INSERT INTO Enrollments (student_id, course_id, enrollment_date)
+VALUES 
+(1, 1, '2023-01-01'),
+(2, 1, '2023-01-15');
+INSERT INTO Assignments (class_id, title, description, due_date)
+VALUES 
+(1, 'Build a Personal Portfolio', 'Create a personal portfolio website', '2023-02-01');
+INSERT INTO Assignment_Submissions (assignment_id, student_id, submission_date, grade)
+VALUES 
+(1, 1, '2023-01-31', 'A');
+INSERT INTO Projects (course_id, title, description, due_date)
+VALUES 
+(1, 'Final MERN Stack Project', 'Develop a full-fledged web application using MERN stack', '2023-03-01');
+INSERT INTO Project_Submissions (project_id, student_id, submission_date, grade)
+VALUES 
+(1, 2, '2023-02-28', 'A');
